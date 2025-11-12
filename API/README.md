@@ -1,4 +1,4 @@
-# 🔌 API Testing (Postman)
+# API Testing (Postman)
 
 This folder contains Postman collections created during my QA training at **Czechitas Digital Academy: Testing**.  
 Each collection demonstrates practical API testing using real-world endpoints, assertions, and variables.
