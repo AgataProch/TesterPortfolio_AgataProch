@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "18708880-db2b-4fb5-86b3-0e1dde4b6cf8",
+		"name": "Czechibank_E2E",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49087342",
+		"_collection_link": "https://agata-prochazkova-3503933.postman.co/workspace/Czechibank_2025~9f258e09-6943-4d51-9632-be53456e0ebb/collection/49087342-18708880-db2b-4fb5-86b3-0e1dde4b6cf8?action=share&source=collection_link&creator=49087342"
+	},
+	"item": [
+		{
+			"name": "01_User_creation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201); //ptám se, jestli mi to funguje správně a vrací mi to odpověď 201 ",
+							"});",
+							"",
+							"pm.test(\"Check JSON structure\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.role).to.eql(\"user\"); //ptá se, jestli v tom JSONu (té odpovědi) je role nastavená na user",
+							"    pm.expect(jsonData).to.property(\"apiKey\"); //ptá se, jestli v tom JSONu je hodnota apiKey",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"apiKey\", pm.response.json().apiKey); //uloží hodnotu apiKey do proměnné apiKey v kolekci",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"email\": \"{{$randomEmail}}\",\n\"name\": \"{{$randomFullName}}\",\n\"password\": \"{{$randomPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/user/create",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"user",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02_Initial_bank_account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Initial balance is 100000\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.bankAccounts[0].balance).to.eql(100000); // bank account je pole, hodnota na prvním místě je 0, druhá hodnota je 1, na třetím místě je hodnota 2, hodnota je vždy mezi {}, pole je mezi [], celé to info o tomto účtu v {} je jedna hodnota a je na prvním místě",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"initAccNr\", pm.response.json().data.bankAccounts[0].number); // uložíme si hodnotu do proměnné, abychom ji mohli použít",
+							"pm.collectionVariables.set(\"initAccId\", pm.response.json().data.bankAccounts[0].id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bank-account",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bank-account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03_New_account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Successful creation\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.bankAccount.success).to.eql(true);",
+							"});",
+							"",
+							"pm.test(\"Initial balance is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"     pm.expect(jsonData.data.bankAccount.data.balance).to.eql(0);",
+							"});",
+							"pm.collectionVariables.set(\"newAccNr\", pm.response.json().data.bankAccount.data.number); // uložíme si hodnotu do proměnné, abychom ji mohli použít",
+							"pm.collectionVariables.set(\"newAccId\", pm.response.json().data.bankAccount.data.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"currency\": \"CZECHITOKEN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bank-account/create",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bank-account",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04_Rename_new_account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Successful creation\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"My Savings Account\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bank-account/{{newAccId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bank-account",
+						"{{newAccId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05_Create_transaction",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Successful transaction\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"amount\": 100,\n  \"fromBankNumber\": \"{{initAccNr}}\",\n  \"toBankNumber\": \"{{newAccNr}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/transactions/create",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"transactions",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06_Balance_changed_IC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Balance is 99900\", function () {",
+							"    var jsonData = pm.response.json();",
+							"     pm.expect(jsonData.data.balance).to.eql(99900);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bank-account/{{initAccId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bank-account",
+						"{{initAccId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07_Balance_changed_NC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Balance is 100\", function () {",
+							"    var jsonData = pm.response.json();",
+							"     pm.expect(jsonData.data.balance).to.eql(100);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bank-account/{{newAccId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bank-account",
+						"{{newAccId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-KEY",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "apiKey",
+			"value": ""
+		},
+		{
+			"key": "initAccNr",
+			"value": ""
+		},
+		{
+			"key": "initAccId",
+			"value": ""
+		},
+		{
+			"key": "newAccNr",
+			"value": ""
+		},
+		{
+			"key": "newAccId",
+			"value": ""
+		}
+	]
+}
