@@ -6,7 +6,7 @@ It demonstrates my skills across several key areas of software testing – manua
 ## Structure
 
 - **Web (HTML, CSS; VS Code)**  
-  Simple webpage built and tested as part of frontend testing practice. [LinkedIn](https://www.linkedin.com/in/agata-prochazkova/)
+  Simple webpage built and tested as part of frontend testing practice [show web](https://agataproch.github.io/TesterPortfolio_AgataProch/)
 
 - **API (Postman)**  
   Postman collections for testing various endpoints – includes authentication, negative scenarios, and status code validation.
