@@ -21,7 +21,7 @@ The goal of these queries was to develop strong analytical thinking, understand 
 ---
 
 ## 💾 Example query
-
+```sql
 -- Task: Display the average attendance hours per person, sorted ascending
 SELECT
   o.jmeno,
