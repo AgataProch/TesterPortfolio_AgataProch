@@ -15,16 +15,16 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {",
-							"    pm.response.to.have.status(201); //ptám se, jestli mi to funguje správně a vrací mi to odpověď 201 ",
+							"    pm.response.to.have.status(201);",
 							"});",
 							"",
 							"pm.test(\"Check JSON structure\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.role).to.eql(\"user\"); //ptá se, jestli v tom JSONu (té odpovědi) je role nastavená na user",
-							"    pm.expect(jsonData).to.property(\"apiKey\"); //ptá se, jestli v tom JSONu je hodnota apiKey",
+							"    pm.expect(jsonData.role).to.eql(\"user\");",
+							"    pm.expect(jsonData).to.property(\"apiKey\");",
 							"});",
 							"",
-							"pm.collectionVariables.set(\"apiKey\", pm.response.json().apiKey); //uloží hodnotu apiKey do proměnné apiKey v kolekci",
+							"pm.collectionVariables.set(\"apiKey\", pm.response.json().apiKey);",
 							""
 						],
 						"type": "text/javascript",
@@ -71,10 +71,10 @@
 							"",
 							"pm.test(\"Initial balance is 100000\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.data.bankAccounts[0].balance).to.eql(100000); // bank account je pole, hodnota na prvním místě je 0, druhá hodnota je 1, na třetím místě je hodnota 2, hodnota je vždy mezi {}, pole je mezi [], celé to info o tomto účtu v {} je jedna hodnota a je na prvním místě",
+							"    pm.expect(jsonData.data.bankAccounts[0].balance).to.eql(100000);",
 							"});",
 							"",
-							"pm.collectionVariables.set(\"initAccNr\", pm.response.json().data.bankAccounts[0].number); // uložíme si hodnotu do proměnné, abychom ji mohli použít",
+							"pm.collectionVariables.set(\"initAccNr\", pm.response.json().data.bankAccounts[0].number);",
 							"pm.collectionVariables.set(\"initAccId\", pm.response.json().data.bankAccounts[0].id);"
 						],
 						"type": "text/javascript",
@@ -118,7 +118,7 @@
 							"    var jsonData = pm.response.json();",
 							"     pm.expect(jsonData.data.bankAccount.data.balance).to.eql(0);",
 							"});",
-							"pm.collectionVariables.set(\"newAccNr\", pm.response.json().data.bankAccount.data.number); // uložíme si hodnotu do proměnné, abychom ji mohli použít",
+							"pm.collectionVariables.set(\"newAccNr\", pm.response.json().data.bankAccount.data.number);",
 							"pm.collectionVariables.set(\"newAccId\", pm.response.json().data.bankAccount.data.id);"
 						],
 						"type": "text/javascript",
