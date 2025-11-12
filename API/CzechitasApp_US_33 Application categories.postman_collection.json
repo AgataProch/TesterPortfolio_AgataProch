@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "2a1726d9-16db-4eea-9971-e8785dc542e4",
+		"name": "US_33 Application categories",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49087342",
+		"_collection_link": "https://agata-prochazkova-3503933.postman.co/workspace/Czechitas-App~0862a64f-c8e7-4000-bd55-dcb2dafd4f28/collection/49087342-2a1726d9-16db-4eea-9971-e8785dc542e4?action=share&source=collection_link&creator=49087342"
+	},
+	"item": [
+		{
+			"name": "01_List_all_categories_MA_Happy_path",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const expectedFields = [",
+							"    \"id\",",
+							"    \"parent_id\",",
+							"    \"name\",",
+							"    \"slug\",",
+							"    \"content\",",
+							"    \"position\",",
+							"    \"created_at\",",
+							"    \"updated_at\",",
+							"    \"imagePath\",",
+							"    \"children\"",
+							"];",
+							"",
+							"pm.test(\"Response contains all required fields\", function () {",
+							"    const response = pm.response.json()[0]; // Accessing the first object in the array",
+							"    expectedFields.forEach(field => {",
+							"        pm.expect(response).to.have.property(field);",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Each field has correct type\", function () {",
+							"    const response = pm.response.json()[0];",
+							"    const expectedTypes = {",
+							"        \"id\": \"number\",",
+							"        \"parent_id\": \"number\",",
+							"        \"name\": \"string\",",
+							"        \"slug\": \"string\",",
+							"        \"content\": \"string\",",
+							"        \"position\": \"number\",",
+							"        \"created_at\": \"string\",",
+							"        \"updated_at\": \"string\",",
+							"        \"imagePath\": \"string\",",
+							"        \"children\": \"array\"",
+							"    };",
+							"",
+							"    Object.entries(expectedTypes).forEach(([field, type]) => {",
+							"        pm.expect(typeof response[field], `${field} should be a ${type}`).to.eql(type);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "fIrIChYkwMZ6tH0cjpBFz6djA9jfEcia",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02_List_all_categories_Admin_Happy_path",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const expectedFields = [",
+							"    \"id\",",
+							"    \"parent_id\",",
+							"    \"name\",",
+							"    \"slug\",",
+							"    \"content\",",
+							"    \"position\",",
+							"    \"created_at\",",
+							"    \"updated_at\",",
+							"    \"imagePath\",",
+							"    \"children\"",
+							"];",
+							"",
+							"pm.test(\"Response contains all required fields\", function () {",
+							"    const response = pm.response.json()[0]; // Accessing the first object in the array",
+							"    expectedFields.forEach(field => {",
+							"        pm.expect(response).to.have.property(field);",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Each field has correct type\", function () {",
+							"    const response = pm.response.json()[0];",
+							"    const expectedTypes = {",
+							"        \"id\": \"number\",",
+							"        \"parent_id\": \"number\",",
+							"        \"name\": \"string\",",
+							"        \"slug\": \"string\",",
+							"        \"content\": \"string\",",
+							"        \"position\": \"number\",",
+							"        \"created_at\": \"string\",",
+							"        \"updated_at\": \"string\",",
+							"        \"imagePath\": \"string\",",
+							"        \"children\": \"array\"",
+							"    };",
+							"",
+							"    Object.entries(expectedTypes).forEach(([field, type]) => {",
+							"        pm.expect(typeof response[field], `${field} should be a ${type}`).to.eql(type);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5|RjCquHiFUz0BrUiPu1ATnGg2JGV4MPxhCFTL9b1y0ced1cf3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03_List_all_categories_Parent_Happy_path",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const expectedFields = [",
+							"    \"id\",",
+							"    \"parent_id\",",
+							"    \"name\",",
+							"    \"slug\",",
+							"    \"content\",",
+							"    \"position\",",
+							"    \"created_at\",",
+							"    \"updated_at\",",
+							"    \"imagePath\",",
+							"    \"children\"",
+							"];",
+							"",
+							"pm.test(\"Response contains all required fields\", function () {",
+							"    const response = pm.response.json()[0]; // Accessing the first object in the array",
+							"    expectedFields.forEach(field => {",
+							"        pm.expect(response).to.have.property(field);",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Each field has correct type\", function () {",
+							"    const response = pm.response.json()[0];",
+							"    const expectedTypes = {",
+							"        \"id\": \"number\",",
+							"        \"parent_id\": \"number\",",
+							"        \"name\": \"string\",",
+							"        \"slug\": \"string\",",
+							"        \"content\": \"string\",",
+							"        \"position\": \"number\",",
+							"        \"created_at\": \"string\",",
+							"        \"updated_at\": \"string\",",
+							"        \"imagePath\": \"string\",",
+							"        \"children\": \"array\"",
+							"    };",
+							"",
+							"    Object.entries(expectedTypes).forEach(([field, type]) => {",
+							"        pm.expect(typeof response[field], `${field} should be a ${type}`).to.eql(type);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "6|ZQwVo6iALWPvA6oFoFKMgqNtqWcnWOnP3wA6IHC85484ccab",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04_List_all_categories_Missing_token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Should return Unauthenticated response\", function () {",
+							"   var jsonData = pm.response.json();",
+							"   pm.expect(jsonData.message).to.eql(\"Unauthenticated\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05_List_all_categories_Blocked_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});",
+							"",
+							"pm.test(\"Should return Unauthorized response\", function () {",
+							"   var jsonData = pm.response.json();",
+							"   pm.expect(jsonData.message).to.eql(\"This action is unauthorized.\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "10|Hqq1bIMyrTxMmZknNxlSRO6WVu0Q8Ievv0J4pZSk93772904",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06_Post_List_all_categories_MA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "fIrIChYkwMZ6tH0cjpBFz6djA9jfEcia",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07_Delete_List_all_categories_MA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "fIrIChYkwMZ6tH0cjpBFz6djA9jfEcia",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "08_Put_List_all_categories_MA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "fIrIChYkwMZ6tH0cjpBFz6djA9jfEcia",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "09_Patch_List_all_categories_MA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "fIrIChYkwMZ6tH0cjpBFz6djA9jfEcia",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		}
+	]
+}
