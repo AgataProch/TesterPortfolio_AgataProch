@@ -33,11 +33,6 @@ Each collection demonstrates practical API testing using real-world endpoints, a
 - Data validation through `pm.expect()` assertions  
 - Chaining variables (`apiKey`, `accId`, `accNr`) between requests  
 
-### Run
-1. Import the collection into **Postman**  
-2. Set `baseURL` in **Collection Variables**  
-3. Run all requests sequentially to simulate a full E2E user flow  
-
 ---
 
 ## CzechitasApp — US_33 Application Categories
@@ -60,9 +55,4 @@ Each collection demonstrates practical API testing using real-world endpoints, a
 - Data type assertions for every field (string, number, array)
 - Bearer token authentication
 - Handling of access levels and permission errors
-
-### Run
-1. Import `CzechitasApp_US_33 Application categories.postman_collection.json`  
-2. Set `{{baseURL}}` variable  
-3. Run individual requests or the entire collection
 
