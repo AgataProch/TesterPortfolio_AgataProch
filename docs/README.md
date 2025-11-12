@@ -1,4 +1,4 @@
-# Web Testing Project
+# Web Creation Project
 
 This folder contains a simple **HTML & CSS website** created and tested as part of my QA training at **Czechitas Digital Academy: Testing**.  
 The project demonstrates my understanding of frontend basics, structure validation, and visual inspection techniques.
