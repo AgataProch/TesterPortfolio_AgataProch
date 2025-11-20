@@ -289,9 +289,9 @@ where osoba_projekt.prirazeno_do is not NULL;
 
 --Task 9
 select
---o.id_osoba,
---o.jmeno,
---o.prijmeni,
+o.id_osoba,
+o.jmeno,
+o.prijmeni,
 n.jmeno as nadr_jmeno,
 n.prijmeni as nadr_prijmeni,
 count(u.id_ukol)
