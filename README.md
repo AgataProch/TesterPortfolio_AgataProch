@@ -14,8 +14,8 @@ It demonstrates my skills across several key areas of software testing – manua
 - **Database (SQL; DBeaver)**  
   SQL queries and exercises – joins, aggregations, and data validation examples.
 
-- **Automation (IntelliJ IDEA – Low-code framework)**
-  Low-code UI automation project built on a predefined educational framework.
+- **Automation (IntelliJ IDEA – Low-code framework)**  
+  Low-code UI automation project built on a predefined educational framework.  
   My main work is in LowCodeAutomationTest.java, where I created and executed end-to-end UI scenarios (navigation, form filling, payment selection, validations).  
 
 ## Tools & Skills
