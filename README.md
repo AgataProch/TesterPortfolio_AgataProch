@@ -28,6 +28,8 @@ It demonstrates my skills across several key areas of software testing – manua
 - Agile & Scrum basics
 - Manual testing, exploratory testing
 
+---
+
 ## About me
 I'm transitioning from marketing to software testing.  
 I enjoy analyzing, exploring, and improving systems to ensure quality and reliability :)
